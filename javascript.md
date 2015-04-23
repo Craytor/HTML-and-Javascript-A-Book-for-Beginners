@@ -24,7 +24,26 @@ Client-side scripting is just what the name implies, scripting on the client sid
 Unlike client-side scripting, server-side scripting is code that is executed and ran on the server and not on the client. By using server-side scripting, you can open may more doors, and do things you couldn’t do with client-side scripting such as accessing a database, making purchases, the list goes on and this is all done securely. Server-side scripting does a lot of the process a website may need to do in order to display content such as calculating certain things and retrieving results from a database. For code that is stored on a server, it cannot be accessed by the visitor at all, it’s completely locked down and cannot be edited by the user, unlike Javascript.
 
 ## Getting Started
-Alright, so now that we know what the differences are between client and server-side scripting, we can now begin to utilize the elements of client-side scripting. Again, we are choosing this route because we do not have access to a server where we could execute these scripts, and client-side scripting is all executed within the browser. So with that being said, these are the main points we will cover with JavaScript. For the JavaScript sections, please use a new document with just the following:
+Alright, so now that we know what the differences are between client and server-side scripting, we can now begin to utilize the elements of client-side scripting. Again, we are choosing this route because we do not have access to a server where we could execute these scripts, and client-side scripting is all executed within the browser. So with that being said, these are the main points we will cover with JavaScript. 
+
+We will cover the following in this ection:
+
+* Logging Data
+* Defining Variables
+* Accessing Variables
+* Displaying Variables (their content)
+* Numerical Operations
+	* Addition
+    * Subtraction
+    * Multiplication
+    * Division
+* Functions
+* Objects
+	* Properties
+    * Methods
+* Events
+
+For the JavaScript sections, please use a new document with just the following:
 ```
 <html>
     <head>
@@ -33,10 +52,6 @@ Alright, so now that we know what the differences are between client and server-
     </body>
 </html>
 ```
-
-* Logging Data
-* Defining Variables
-* Accessing Variables
 
 #### Logging Data
 When starting to develop in JavaScript, you need to be able to debug (find your errors) in your code. A good way to do this is log data a JavaScript console. This is also a good way to tell how far your code is executing before you get an error so that you can easily find out where it's going bad. So, for starters, you will want to find out where your JavaScript Console is.
@@ -80,50 +95,79 @@ Okay, now that we know how to declare the variables, how do we view the data? It
 console.log(hello);
 console.log(myNumber);
 ```
+
+Here is what the console should look like:
+{<2>}![](/content/images/2015/04/2-1.PNG)
 >Note that you should insert this into your `<script></script>` tags along with your variables (`var myNumber = 1;` and `var hello = "Hello World!";`).
 
 #### Accessing Variables
 So once you defined your variable, you need to be able to access it. Accessing a variable is pretty easy, and actually we just done this when we logged the contents of a variable to the console. So in order to log, or use the contents of the variable, you just use the variable name, it's just that simple!
 
-#### Displaying Variables (on a page)
+#### Displaying Variables (their content)
 Now, this is most likely the moment you have been waiting for! So just how do you display that variable on your webpage? Well let's take a look!
 
 >This will require **both** HTML and JavaScript for your results to work as planned.
 
 So by using JavaScript, we could select the whole page and replace it's content with what we specify, but that isn't fesable in a real-world application. Instead we will go ahead and get the content of a div, and replace the contents of it with what ever our variable is. Ready?
 
-So, let's take a look at the body section of our site.
+So, let's take a look at the body section of our site. Notice how we have an onload event attribute. All this means is once the body loads, it will then run the function in JavaScript. Don't know what a function is? That's fine... It's coming up!
 ```
-<body>
+<body onload="loaded()">
 	<div id="content"></div>
 </body>
 ```
 
-Now within JavaScript, we can now select the `content` div and do our fancy stuff! Let's take a look
+Now within JavaScript, we can now select the `content` div and do our fancy stuff! Let's take a look... Notice how we have the loaded() function - all it does is holds content and can be called, and once called, the code is then exectued.We will learn more about functions later on.
 ```
-var hello = "Hello world!";
-document.getElementById("content").innerHTML = hello;
+function loaded() {
+    var hello = "Hello world!";
+    document.getElementById("content").innerHTML = hello;
+}
 ```
-By utilizing the document object we can use the getElementById function, and therefore can select the contents of the div and replace it all with the variable `hello`.
+Here's a look at what you may see on your page (i.e. dependign what you set your hello variable to).
+{<3>}![](/content/images/2015/04/hello_world-.PNG)
 
->You can also set a variable equal to HTML code and insert the HTML code within the content div!
+Now, before we go any further, let's try one more thing!
+Let's go back up into our loaded() function and take a look at that variable we set. Let's actually change the content of "Hello world" to somthing with **HTML**! Yes, we can even include HTML tags within the variable. Alright, so let's put "Hello world!" in a bold tag within a paragraph tag. This is what our variable should look like now:
+```
+var hello = "<p><b>Hello world!</b></p>";
+```
+
+By utilizing the document object we can use the getElementById function, and therefore can select the contents of the div and replace it all with the variable `hello`. Here's a look:
+{<4>}![](/content/images/2015/04/Screenshot-2015-04-22-at-11-09-06-AM.png)
 
 #### Numerical Operations & Variables
 You can do many things with variables, the outcome is unlimited! Another thing that may come in handy is to add (numerical) variables together. Let's take a look:
 
-###### Multipication
+###### Addition
+Let's say that you have a $5.00 bill, $10.00 bill, $20.00 bill, and a $50.00 bill - how much money do you have in total? Let's go ahead and solve this:
+```
+var total = 5 + 10 + 20 + 50;
+console.log(total);
+```
+
+{<5>}![](/content/images/2015/04/Screenshot-2015-04-22-at-11-12-56-AM.png)
 
 ###### Subtraction
+So using the total from above, you go and buy yourself a meal at Sheetz. You buy a 3 piece chicken, a bucket of Fryz, and a large fountain soda - the total comes to $8.54. How much money do you have left?
+
+```
+var total = 130;  // get this from the problem before
+
+var cost = 8.54;
+var amount = 130 - 8.54;
+console.log(amount);
+```
 
 ###### Multipication
 So, what if you wanted to calculate the area of a rectangle - maybe this is the banner on your website. Well - we can do that! Let's say that dimensions of the banner are `900px x 300px`, we can do the following: 
 
 ```
-	var width = 900;
-    var height = 300;
-    
-    var area = width * height;
-    console.log(area + "square pixles");
+var width = 900;
+var height = 300;
+
+var area = width * height;
+console.log(area + "square pixles");
 ```
 
 ###### Division
@@ -134,5 +178,30 @@ Suppose a flagpole's shadow is 25 feet long, and a person is standing next to it
 ```
 Alright, so let's consult this as if it was a math problem. We are going to have to make two porportions. One proportion is `x/25` (for the flagpole) while the other proportion is going to be  `5/3`. Now in math we would cross multiply and set each side equal to one another - so let's do that.
 
+```
+// note these are the sides of the equation after cross multiplication...
+
+var flagpole = 125;
+var person = 3; // it's suppose to be 3x, let's remove the x, JavaScript isn't that smart
+
+var flagpole_height = flagpole / person;
+console.log('x = ' + flagpole_height + ' feet');
+```
+
+#### Functions
+Coming soon...
+
+#### Objects
+Coming soon...
+###### Properties
+Coming soon...
+###### Methods
+Coming soon...
+
+#### Events
+Coming soon...
 #### Copyright Notice
 This content is subject to change. All content is copyright Tyler Youschak, you may not reuse, redistribute, or recreate, in any way, shape, or form, oral, written, etc.
+
+
+Last Updated: 04/22/15 8:54
